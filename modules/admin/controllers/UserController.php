@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\User;
+use app\modules\admin\models\User;
 use yii\rest\ActiveController;
 
 class UserController extends ActiveController
