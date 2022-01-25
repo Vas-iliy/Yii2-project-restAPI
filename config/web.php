@@ -7,7 +7,6 @@ $config = [
     'id' => 'basic',
     'language' => 'ru',
     'name' => 'project API',
-    'homeUrl' => '/project-restAPI/admin',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [

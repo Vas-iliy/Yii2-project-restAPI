@@ -2,52 +2,71 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
+use yii\helpers\Html;
+
+$this->title = Yii::$app->getUser()->identity->username;
 ?>
 <div class="site-index">
-
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+    <?php
+    echo Nav::widget([
+        'items' => [
+            [
+                'label' => 'Create Post',
+                'url' => ['post/create'],
+            ],
+            [
+                'label' => 'Profile',
+                'url' => ['user/index'],
+            ],
+        ],
+        'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
+    ]);
+    ?>
+</div>
+<?if(!empty($posts)):?>
+<div class="container-fluid">
+    <div class="row">
+        <?foreach ($posts as $post):?>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <?$i = 1; foreach ($post->images as $image):?>
+                            <div class="carousel-item <?=$i == 1 ? 'active' : ''?>">
+                                <?=Html::img("@web/{$image->title}", ['class' => 'card-img-top', 'height' => 200]) ?>
+                            </div>
+                            <?$i++; endforeach;?>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><?=$post->title?></h5>
+                    <p class="card-text"><?=$post->text?></p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
             </div>
         </div>
-
+        <?endforeach;?>
+        <div class="clearfix"> </div>
+        <div class="col-lg-12">
+            <?=\yii\widgets\LinkPager::widget([
+                'pagination' => $pages,
+                'maxButtonCount' => 3,
+                'pageCssClass' => 'page-item',
+                'linkOptions' => ['class' => 'page-link']
+            ])?>
+        </div>
     </div>
 </div>
+<?endif;?>
