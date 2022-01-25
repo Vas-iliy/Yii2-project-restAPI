@@ -15,7 +15,7 @@ class AppAdminController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['login'],
+                        'actions' => ['login', 'signup'],
                         'roles' => ['?'],
                     ],
                     [
@@ -26,4 +26,5 @@ class AppAdminController extends Controller
             ],
         ];
     }
+
 }

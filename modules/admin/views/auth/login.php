@@ -6,6 +6,7 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -34,16 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
 
-        <div class="form-group">
-            <div class="offset-lg-1 col-lg-11">
+        <div class="row">
+            <div class="col-6 text-center">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
 
     <?php ActiveForm::end(); ?>
+</div>
 
-    <div class="offset-lg-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-    </div>
+<div class="col-6 text-center" style="padding-top: 10px;">
+    <a href="<?=Url::to('signup')?>" class="btn btn-primary">Signup</a>
 </div>

@@ -39,7 +39,7 @@ $config = [
 
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'admin/main/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -68,6 +68,7 @@ $config = [
                     'controller' => 'user',
                     'pluralize' => false,
                 ],
+                '' => 'admin',
             ],
         ],
     ],

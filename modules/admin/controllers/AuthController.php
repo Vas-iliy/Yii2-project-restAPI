@@ -5,6 +5,8 @@ namespace app\modules\admin\controllers;
 
 
 use app\models\LoginForm;
+use app\models\SignupForm;
+use app\models\User;
 use Yii;
 
 class AuthController extends AppAdminController
@@ -30,5 +32,19 @@ class AuthController extends AppAdminController
     {
         Yii::$app->user->logout();
         return $this->redirect('/project-restAPI/admin');
+    }
+
+    public function actionSignup()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect('/project-restAPI/admin');
+        }
+
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            return $this->redirect('/project-restAPI/admin');
+        }
+
+        return $this->render('signup', compact('model'));
     }
 }

@@ -41,10 +41,10 @@ AppAsset::register($this);
             ['label' => 'Users', 'url' => ['/admin/user']],
             ['label' => 'Posts', 'url' => ['/admin/post']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/admin/auth/login']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+                . Html::beginForm(['/admin/auth/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
