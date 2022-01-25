@@ -57,4 +57,18 @@ class Image extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Post::className(), ['id' => 'post_id']);
     }
+
+    public function CreateImages($title, $id)
+    {
+        foreach ($title as $item) {
+            $this->id = null;
+            $this->isNewRecord = true;
+            $this->title = $item;
+            $this->post_id = $id;
+            if (!$this->save()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

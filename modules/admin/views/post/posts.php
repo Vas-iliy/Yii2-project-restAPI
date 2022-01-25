@@ -11,7 +11,7 @@
                             <div class="carousel-inner">
                                 <?$i = 1; foreach ($post->images as $image):?>
                                     <div class="carousel-item <?=$i == 1 ? 'active' : ''?>">
-                                        <?=Html::img("@web/{$image->title}", ['class' => 'card-img-top', 'height' => 200]) ?>
+                                        <?=Html::img("@web/{$image->title}", ['class' => 'card-img-top', 'height' => 250]) ?>
                                     </div>
                                     <?$i++; endforeach;?>
                             </div>
