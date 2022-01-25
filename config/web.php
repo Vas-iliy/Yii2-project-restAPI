@@ -5,6 +5,9 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'language' => 'ru',
+    'name' => 'project API',
+    'homeUrl' => '/project-restAPI/admin',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -13,6 +16,7 @@ $config = [
     ],
     'modules' => [
         'admin' => [
+            'layout' => 'admin',
             'class' => 'app\modules\admin\Module',
             'defaultRoute' => 'main/index',
         ],
