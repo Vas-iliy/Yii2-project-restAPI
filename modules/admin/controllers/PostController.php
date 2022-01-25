@@ -4,18 +4,14 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\Image;
 use app\modules\admin\models\Post;
-use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
-use yii\db\Exception;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends AppAdminController
 {
     /**
      * @inheritDoc
