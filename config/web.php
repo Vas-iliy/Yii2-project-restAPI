@@ -14,6 +14,7 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'defaultRoute' => 'main/index',
         ],
     ],
     'components' => [
@@ -31,6 +32,8 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => '/project-restAPI/admin/auth/login'
+
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
