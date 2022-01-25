@@ -29,7 +29,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandUrl' => '<a class="nav-link" href="' .Url::to(['/admin']).'">Home</a>',
+        'brandUrl' => Url::to(['/admin']),
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
@@ -38,8 +38,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/admin']],
-            ['label' => 'Users', 'url' => ['/admin/users']],
-            ['label' => 'Posts', 'url' => ['/admin/posts']],
+            ['label' => 'Users', 'url' => ['/admin/user']],
+            ['label' => 'Posts', 'url' => ['/admin/post']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -61,6 +61,10 @@ AppAsset::register($this);
 <main role="main" class="flex-shrink-0">
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'Home ',
+                'url' => Url::to(['/admin']),
+            ],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
