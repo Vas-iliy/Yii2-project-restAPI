@@ -70,6 +70,12 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['api/user'],
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['api/new'],
+                    'pluralize' => false,
                 ],
                 '' => 'admin',
             ],
