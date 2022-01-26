@@ -19,15 +19,19 @@ $config = [
             'class' => 'app\modules\admin\Module',
             'defaultRoute' => 'main/index',
         ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+            /*'defaultRoute' => 'main/index',*/
+        ],
     ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'eiKkkbRFf5bGzkZIxQ3GpvRAJ4WZcl_i',
             'baseUrl' => '/project-restAPI',
-            /*'parsers' => [
+            'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
-            ],*/
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -65,8 +69,7 @@ $config = [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'user',
-                    'pluralize' => false,
+                    'controller' => ['api/user'],
                 ],
                 '' => 'admin',
             ],
