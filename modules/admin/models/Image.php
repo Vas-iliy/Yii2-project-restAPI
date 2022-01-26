@@ -55,11 +55,12 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getPost()
     {
-        return $this->hasOne(Post::className(), ['id' => 'post_id']);
+        return $this->hasOne(Post::class, ['id' => 'post_id']);
     }
 
     public function CreateImages($title, $id)
     {
+        if (empty($title)) return false;
         foreach ($title as $item) {
             $this->id = null;
             $this->isNewRecord = true;
@@ -70,5 +71,14 @@ class Image extends \yii\db\ActiveRecord
             }
         }
         return true;
+    }
+
+    public static function deleteImages($post)
+    {
+        $images = $post->getImages()->asArray()->all();
+        foreach ($images as $image) {
+            unlink( Yii::$app->basePath . "/web/{$image['title']}");
+        }
+        $post->unlinkAll('images', true);
     }
 }

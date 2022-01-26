@@ -69,8 +69,22 @@ class PostController extends AppAdminController
         $imgs = new Image();
 
         if ($this->request->isPost) {
-            $model->user_id = \Yii::$app->getUser()->id;
-            $model->load($this->request->post());
+            $this->createPost($model, $imgs);
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function createPost($model, $imgs)
+    {
+        $model->user_id = \Yii::$app->getUser()->id;
+        $model->load($this->request->post());
+        if ($model->validate()) {
+            Image::deleteImages($model);
             $transaction = \Yii::$app->getDb()->beginTransaction();
             if (!$model->save() || !$imgs->CreateImages($model->imgs, $model->id)) {
                 \Yii::$app->session->setFlash('error', 'Ошибка создания страницы');
@@ -80,13 +94,7 @@ class PostController extends AppAdminController
                 \Yii::$app->session->setFlash('success', 'Страница создана');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -99,12 +107,14 @@ class PostController extends AppAdminController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $imgs = new Image();
+
         if ($model->user_id !== \Yii::$app->getUser()->id){
             throw new NotFoundHttpException('У вас нет прав доступа на редактирование этой страницы');
         }
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            $this->createPost($model, $imgs);
         }
 
         return $this->render('update', [
@@ -126,6 +136,7 @@ class PostController extends AppAdminController
         if ($model->user_id !== \Yii::$app->getUser()->id){
             throw new NotFoundHttpException('У вас нет прав доступа на удаление этой страницы');
         }
+        Image::deleteImages($model);
         $model->delete();
 
         return $this->redirect(['index']);

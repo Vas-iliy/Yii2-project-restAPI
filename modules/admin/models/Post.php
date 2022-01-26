@@ -3,7 +3,6 @@
 namespace app\modules\admin\models;
 
 use app\models\User;
-use Yii;
 use yii\web\UploadedFile;
 
 /**
@@ -49,10 +48,8 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
             'title' => 'Title',
             'text' => 'Text',
-            'user_id' => 'User ID',
         ];
     }
 
