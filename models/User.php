@@ -24,7 +24,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['auth_key' => $token]);
+        /*return static::findOne(['auth_key' => $token]);*/
+        return static::find()
+            ->joinWith(['tokens t'])
+            ->andWhere(['t.token' => $token])
+            ->andWhere(['>', 't.expired_at', time()])
+            ->one();
     }
 
     /**
@@ -77,5 +82,19 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = \Yii::$app->security->generateRandomString();
+    }
+
+    public function getTokens()
+    {
+        return $this->hasMany(Token::class, ['user_id' => 'id']);
+    }
+
+    public function fields()
+    {
+        return [
+            'id' => 'id',
+            'username' => 'username',
+            'email' => 'email',
+        ];
     }
 }

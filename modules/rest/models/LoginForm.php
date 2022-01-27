@@ -3,7 +3,7 @@
 namespace app\modules\rest\models;
 
 use app\models\Token;
-use Yii;
+use app\models\User;
 use yii\base\Model;
 
 class LoginForm extends Model

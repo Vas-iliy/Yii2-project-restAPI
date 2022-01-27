@@ -16,12 +16,7 @@ class AuthController extends Controller
     {
         $model = new LoginForm();
         $model->load($this->request->bodyParams, '');
-        if ($token = $model->auth()) {
-            return [
-                'token' => $token->token,
-                'expired' => date(DATE_RFC3339, $token->expired_at),
-            ];
-        }
+        if ($token = $model->auth()) return $token;
         return $model;
     }
 

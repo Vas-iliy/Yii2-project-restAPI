@@ -76,11 +76,11 @@ $config = [
                     'controller' => ['api/user', 'api/new'],
                     'pluralize' => false,
                 ],
-                /*[
+                [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['rest/auth'],
+                    'controller' => ['rest/auth', 'rest/profile'],
                     //'pluralize' => false,
-                ],*/
+                ],
                 '' => 'admin',
                 //'auth' => 'rest/auth/login',
             ],
