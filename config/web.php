@@ -23,6 +23,10 @@ $config = [
             'class' => 'app\modules\api\Module',
             /*'defaultRoute' => 'main/index',*/
         ],
+        'rest' => [
+            'class' => 'app\modules\rest\Module',
+            /*'defaultRoute' => 'main/index',*/
+        ],
     ],
     'components' => [
         'request' => [
@@ -69,15 +73,16 @@ $config = [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['api/user'],
+                    'controller' => ['api/user', 'api/new'],
                     'pluralize' => false,
                 ],
-                [
+                /*[
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['api/new'],
-                    'pluralize' => false,
-                ],
+                    'controller' => ['rest/auth'],
+                    //'pluralize' => false,
+                ],*/
                 '' => 'admin',
+                //'auth' => 'rest/auth/login',
             ],
         ],
     ],
