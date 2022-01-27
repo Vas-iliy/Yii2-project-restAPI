@@ -13,21 +13,6 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'modules' => [
-        'admin' => [
-            'layout' => 'admin',
-            'class' => 'app\modules\admin\Module',
-            'defaultRoute' => 'main/index',
-        ],
-        'api' => [
-            'class' => 'app\modules\api\Module',
-            /*'defaultRoute' => 'main/index',*/
-        ],
-        'rest' => [
-            'class' => 'app\modules\rest\Module',
-            /*'defaultRoute' => 'main/index',*/
-        ],
-    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -79,11 +64,30 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['rest/auth', 'rest/profile'],
-                    //'pluralize' => false,
+                    'pluralize' => false,
                 ],
                 '' => 'admin',
-                //'auth' => 'rest/auth/login',
+                'auth' => 'rest/auth/login',
+                '<_c:[\w-]+>' => '<_c>/index',
+                '<_c:[\w-]+>/<id:\d+>' => '<_c>/view',
+                '<_c:[\w-]+>/<id:\d+>/<_a:[\w-]+>' => '<_c>/<_a>',
             ],
+        ],
+    ],
+    'modules' => [
+        'admin' => [
+            'layout' => 'admin',
+            'class' => 'app\modules\admin\Module',
+            'defaultRoute' => 'main/index',
+        ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+
+            /*'defaultRoute' => 'main/index',*/
+        ],
+        'rest' => [
+            'class' => 'app\modules\rest\Module',
+            /*'defaultRoute' => 'main/index',*/
         ],
     ],
     'params' => $params,

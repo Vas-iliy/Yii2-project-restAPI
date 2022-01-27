@@ -19,6 +19,12 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
+        /*$this->components = [
+            'request' => []
+        ];*/
+
+        //\Yii::configure($this, require __DIR__ . '/config.php');
+
         // custom initialization code goes here
     }
 }
