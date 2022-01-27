@@ -63,7 +63,7 @@ $config = [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['rest/auth', 'rest/profile', 'rest/post'],
+                    'controller' => ['rest/auth', 'rest/post'],
                     'pluralize' => false,
                 ],
                 '' => 'admin',

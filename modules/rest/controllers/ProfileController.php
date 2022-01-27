@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\rest\Controller;
+use yii\web\ServerErrorHttpException;
 
 class ProfileController extends Controller
 {
@@ -32,13 +33,30 @@ class ProfileController extends Controller
 
     public function actionIndex()
     {
-        return User::findOne(\Yii::$app->user->id);
+        return $this->findModel();
+    }
+
+    public function actionUpdate()
+    {
+        $model = $this->findModel();
+        $model->load(\Yii::$app->request->getBodyParams(), '');
+
+        if (!$model->save()) {
+            throw new ServerErrorHttpException('Fail');
+        }
+        return $model;
     }
 
     public function verbs()
     {
         return [
-            'index' => ['get']
+            'index' => ['get'],
+            'update' => ['put', 'patch']
         ];
+    }
+
+    protected function findModel()
+    {
+        return User::findOne(\Yii::$app->user->id);
     }
 }

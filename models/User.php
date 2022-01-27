@@ -11,6 +11,13 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return 'user';
     }
 
+    public function rules()
+    {
+        return [
+            [['username', 'email', 'password_hash'], 'required']
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -3,6 +3,9 @@
 namespace app\modules\admin\models;
 
 use app\models\User;
+use yii\helpers\Url;
+use yii\web\Link;
+use yii\web\Linkable;
 use yii\web\UploadedFile;
 
 /**
@@ -16,7 +19,7 @@ use yii\web\UploadedFile;
  * @property Image[] $images
  * @property User $user
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends \yii\db\ActiveRecord implements Linkable
 {
     public $files;
     public $imgs;
@@ -92,5 +95,19 @@ class Post extends \yii\db\ActiveRecord
                 $file->saveAs($file_name);
             }
         }
+    }
+
+    public function extraFields()
+    {
+        return [
+            'author' => 'user',
+        ];
+    }
+
+    public function getLinks()
+    {
+        return [
+            Link::REL_SELF => Url::to(['post/view', 'id' => $this->id], true),
+        ];
     }
 }
